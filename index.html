@@ -1,0 +1,45 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width">
+<title>input-radio tag</title>
+<body style="margin: 2em;">
+
+<h1>input-radio tag</h1>
+<script type="module" src="./input-radio.js"></script>
+
+<input-radio id="inputradio">
+  <option value="1000">ABC</option>
+  <option>DEF</option>
+  <option selected>GHI</option>
+</input-radio>
+
+<button id=chg>change</button>
+
+<script type="module">
+inputradio.onchange = () => {
+  console.log(inputradio.value);
+};
+chg.onclick = () => {
+  inputradio.innerHTML = "<option>あ</option><option>い</option>";
+  //inputradio.querySelector("input").value = 999;
+};
+</script>
+  
+<hr>
+
+<input-radio id="inputradio2">
+  <option>ABC</option><br>
+  <option selected>DEF</option><br>
+  <option>GHI</option><br>
+</input-radio>
+
+<hr>
+
+<input-radio id="inputradio3">
+  <label><input type=radio checked>ABC</label><br>
+  <option>DEF</option><br>
+  <option>GHI</option><br>
+</input-radio>
+
+<hr>
+<style>a { color: gray !important }</style>
+App: <a href=https://fukuno.jig.jp/3263>福野泰介の一日一創</a> (<a href=https://github.com/code4fukui/input-radio>input-radio tag - src on GitHub</a>)<br>
+</body>
