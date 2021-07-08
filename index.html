@@ -40,6 +40,22 @@ chg.onclick = () => {
 </input-radio>
 
 <hr>
+
+<button id="sakuracss">sakura.css</button>
+
+<script type="module">
+import { css } from "https://js.sabae.cc/stdom.js";
+sakuracss.onclick = () => {
+  const link = document.head.querySelector("link");
+  if (link) {
+    link.remove();
+  } else {
+    css();
+  }
+};
+</script>
+
+<hr>
 <style>a { color: gray !important }</style>
-App: <a href=https://fukuno.jig.jp/3263>福野泰介の一日一創</a> (<a href=https://github.com/code4fukui/input-radio>input-radio tag - src on GitHub</a>)<br>
+App: <a href=https://fukuno.jig.jp/3270>福野泰介の一日一創</a> (<a href=https://github.com/code4fukui/input-radio>input-radio tag - src on GitHub</a>)<br>
 </body>
