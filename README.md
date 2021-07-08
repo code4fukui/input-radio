@@ -1,4 +1,4 @@
-# input-raido
+# input-radio
 
 https://code4fukui.github.io/input-radio/
 
