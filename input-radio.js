@@ -20,19 +20,25 @@ class InputRadio extends HTMLElement {
           const text = opt.textContent;
           const selected = opt.getAttribute("selected");
           //console.log(value, text, selected);
-  
+          
+          const c = document.createElement("span");
           const label = document.createElement("label");
           const radio = document.createElement("input");
           radio.type = "radio";
           radio.name = this.name;
           radio.checked = selected == "";
           radio.value = value || text;
-          label.appendChild(radio);
+          radio.id = Math.random();
+          //label.appendChild(radio);
           const span = document.createElement("span");
           label.appendChild(span);
+          label.setAttribute("for", radio.id);
           span.textContent = text;
-  
-          opt.parentNode.replaceChild(label, opt);
+          
+          //opt.parentNode.replaceChild(label, opt);
+          c.appendChild(radio);
+          c.appendChild(label);
+          opt.parentNode.replaceChild(c, opt);
   
           //radio.onchange = () => this.changed(); // 勝手にやってくれる様子
           this.opts.push(radio);

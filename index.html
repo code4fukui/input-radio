@@ -12,14 +12,18 @@
 </input-radio>
 
 <button id=chg>change</button>
+<button id=set>set</button>
 
 <script type="module">
 inputradio.onchange = () => {
   console.log(inputradio.value);
 };
 chg.onclick = () => {
-  inputradio.innerHTML = "<option>あ</option><option>い</option>";
+  inputradio.innerHTML = "<option>あ</option><option value='DEF'>い</option>";
   //inputradio.querySelector("input").value = 999;
+};
+set.onclick = () => {
+  inputradio.value = "DEF";
 };
 </script>
   
