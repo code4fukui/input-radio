@@ -2,11 +2,11 @@ class InputRadio extends HTMLElement {
   constructor() {
     super();
     this.name = (Math.random() * 10000000) >> 0;
+    this.opts = [];
     this._replace();
   }
   _replace() {
-    this.opts = [];
-
+    let flg = false;
     const rep = (o) => {
       for (const opt of o.childNodes) {
         /*
@@ -33,6 +33,7 @@ class InputRadio extends HTMLElement {
           const span = document.createElement("span");
           label.appendChild(span);
           label.setAttribute("for", radio.id);
+          label.id = opt.id;
           span.textContent = text;
           
           //opt.parentNode.replaceChild(label, opt);
@@ -41,6 +42,10 @@ class InputRadio extends HTMLElement {
           opt.parentNode.replaceChild(c, opt);
   
           //radio.onchange = () => this.changed(); // 勝手にやってくれる様子
+          if (!flg) {
+            flg = true;
+            this.opts = [];
+          }
           this.opts.push(radio);
         } else if (opt.nodeName == "INPUT") {
           //console.log(opt.nodeName, opt.getAttribute("type"));
@@ -101,6 +106,10 @@ class InputRadio extends HTMLElement {
     return o.value;
   }
   set value(v) {
+    if (v == null) {
+      this.opts.forEach(o => o.checked = false);
+      return;
+    }
     const o = this.opts.find(o => o.value == v);
     if (!o) {
       return;
