@@ -17,8 +17,10 @@ class InputRadio extends HTMLElement {
         // console.log(opt.nodeName);
         if (opt.nodeName == "OPTION") {
           const value = opt.getAttribute("value");
-          const text = opt.textContent;
+          //const text = opt.textContent;
+          const text = opt.innerHTML;
           const selected = opt.getAttribute("selected");
+          const disabled = opt.getAttribute("disabled");
           //console.log(value, text, selected);
           
           const c = document.createElement("span");
@@ -27,14 +29,17 @@ class InputRadio extends HTMLElement {
           radio.type = "radio";
           radio.name = this.name;
           radio.checked = selected == "";
+          radio.disabled = disabled == "";
           radio.value = value || text;
           radio.id = Math.random();
           //label.appendChild(radio);
-          const span = document.createElement("span");
-          label.appendChild(span);
+          //const span = document.createElement("span");
+          //label.appendChild(span);
           label.setAttribute("for", radio.id);
           label.id = opt.id;
-          span.textContent = text;
+          //span.textContent = text;
+          //span.innerHTML = text;
+          label.innerHTML = text;
           
           //opt.parentNode.replaceChild(label, opt);
           c.appendChild(radio);
@@ -115,6 +120,31 @@ class InputRadio extends HTMLElement {
       return;
     }
     o.checked = true;
+  }
+  set data(json) {
+    if (!Array.isArray(json)) {
+      throw new Error("input-radio#data param is not Array");
+    }
+    if (json.length == 0) {
+      this.innerHTML = "";
+      return;
+    }
+    const ss = [];
+    ss.push("<option value='' disabled>");
+    const d = json[0];
+    for (const n in d) {
+      ss.push("<span class=" + n + ">" + n + "</span>");
+    }
+    ss.push("</option>");
+    let idx = 0;
+    for (const d of json) {
+      ss.push("<option value=" + idx++ + ">");
+      for (const n in d) {
+        ss.push("<span class=" + n + ">" + d[n] + "</span>");
+      }
+      ss.push("</option>");
+    }
+    this.innerHTML = ss.join("");
   }
 }
 

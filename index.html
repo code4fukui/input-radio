@@ -45,18 +45,54 @@ set.onclick = () => {
 
 <hr>
 
+<link rel="stylesheet" href="./input-radio.table.css">
+<input-radio class=table id="inputradio4">
+  <option value=1><span>ABC</span><span>1</span></option>
+  <option value=2 selected><span>DEF</span><span>2</span></option>
+  <option value=3><span>GHI</span><span>3</span></option>
+</input-radio>
+
+<hr>
+
+<style>
+#inputradio5 > span:nth-child(n+2) span { /* 項目行意外を広げる */
+  height: 5em;
+  white-space: normal;
+}
+</style>
+<input-radio class=table id="inputradio5"></input-radio><br>
+value: <span id=inputdaio5res></span><br>
+<script type="module">
+inputradio5.data = [
+  { name: "ABC", num: 33 },
+  { name: "DEF", num: 44 },
+  { name: "GHI", num: 55 },
+  { name: "JKLMNOPRQRSTUVWX", num: 66 },
+  { name: "あいうえおかきくけこさしすせそ", num: 77 },
+];
+inputradio5.onchange = () => {
+  inputdaio5res.textContent = inputradio5.value;
+};
+</script>
+CSS <a href=input-radio.table.css>input-radio.table</a><br>
+
+<hr>
+
 <button id="sakuracss">sakura.css</button>
+<button id="neomocss">neomo.css</button>
 
 <script type="module">
 import { css } from "https://js.sabae.cc/stdom.js";
-sakuracss.onclick = () => {
+const linkCSS = (url) => {
   const link = document.head.querySelector("link");
   if (link) {
     link.remove();
   } else {
-    css("https://unpkg.com/sakura.css/css/sakura.css");
+    css(url);
   }
 };
+sakuracss.onclick = () => linkCSS("https://unpkg.com/sakura.css/css/sakura.css");
+neomocss.onclick = () => linkCSS("https://code4fukui.github.io/neomo.css/neomo.css");
 </script>
 
 <hr>

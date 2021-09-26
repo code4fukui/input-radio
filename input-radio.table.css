@@ -1,0 +1,44 @@
+input-radio.table {
+  display: inline-grid;
+  grid-template-columns: 1fr;
+}
+input-radio.table input[type="radio"]:disabled {
+  opacity: 0; /* 透明にして消す */
+}
+input-radio.table input[type="radio"] {
+  vertical-align: top;
+}
+input-radio.table > span {
+  display: inline-block;
+  border-top: 1px solid black;
+  border-left: 1px solid black;
+}
+input-radio.table > span:last-child {
+  border-bottom: 1px solid black;
+}
+input-radio.table > span span {
+  display: inline-block;
+  padding: 0 .3em;
+  width: 6em;
+  word-break: break-all; /* アルファベットも強制改行 */
+  white-space: nowrap; /* 1行表示 */
+  height: 1.6em; /* 1em + padding .3em x 2 */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: bottom;
+  box-sizing: border-box;
+  border-right: 1px solid black;
+}
+/* 個別に横幅指定する場合 */
+/*
+input-radio.table > span span:nth-child(2) {
+  width: 3em;
+}
+*/
+/* 複数行表示する場合（項目行意外を広げる） */
+/*
+input-radio.table > span:nth-child(n+2) span {
+  white-space: normal;
+  height: 5em;
+}
+*/
