@@ -50,14 +50,14 @@ set.onclick = () => {
   <option value=1><span>ABC</span><span>1</span></option>
   <option value=2 selected><span>DEF</span><span>2</span></option>
   <option value=3><span>GHI</span><span>3</span></option>
-</input-radio>
+</input-radio><br>
+CSS <a href=input-radio.table.css>input-radio.table</a><br>
 
 <hr>
 
 <style>
-#inputradio5 > span:nth-child(n+2) span { /* 項目行意外を広げる */
-  height: 5em;
-  white-space: normal;
+#inputradio5 > span span { /* 幅を広げる */
+  width: 10em;
 }
 </style>
 <input-radio class=table id="inputradio5"></input-radio><br>
@@ -72,6 +72,30 @@ inputradio5.data = [
 ];
 inputradio5.onchange = () => {
   inputdaio5res.textContent = inputradio5.value;
+};
+</script>
+CSS <a href=input-radio.table.css>input-radio.table</a><br>
+
+<hr>
+
+<style>
+#inputradio6 > span:nth-child(n+2) span { /* 項目行意外を広げる */
+  height: 5em;
+  white-space: normal;
+}
+</style>
+<input-radio class=table id="inputradio6"></input-radio><br>
+value: <span id=inputdaio6res></span><br>
+<script type="module">
+inputradio6.data = [
+  { name: "ABC", num: 33 },
+  { name: "DEF", num: 44 },
+  { name: "GHI", num: 55 },
+  { name: "JKLMNOPRQRSTUVWX", num: 66 },
+  { name: "あいうえおかきくけこさしすせそ", num: 77 },
+];
+inputradio6.onchange = () => {
+  inputdaio6res.textContent = inputradio6.value;
 };
 </script>
 CSS <a href=input-radio.table.css>input-radio.table</a><br>
