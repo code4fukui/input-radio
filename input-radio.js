@@ -1,9 +1,18 @@
+import { setAttributes } from "https://js.sabae.cc/stdcomp.js";
+
 class InputRadio extends HTMLElement {
-  constructor() {
+  constructor(opts) {
     super();
+    setAttributes(this, opts);
     this.name = (Math.random() * 10000000) >> 0;
-    this.opts = [];
+    this.options = [];
     this._replace();
+    if (opts?.data) {
+      this.data = opts.data;
+    }
+    if (opts?.value) {
+      this.value = opts.value;
+    }
   }
   _replace() {
     let flg = false;
@@ -19,7 +28,7 @@ class InputRadio extends HTMLElement {
           const value = opt.getAttribute("value");
           //const text = opt.textContent;
           const text = opt.innerHTML;
-          const selected = opt.getAttribute("selected");
+          const selected = opt.getAttribute("selected") || (this.getAttribute("value") == value ? "" : null);
           const disabled = opt.getAttribute("disabled");
           //console.log(value, text, selected);
           
@@ -49,9 +58,9 @@ class InputRadio extends HTMLElement {
           //radio.onchange = () => this.changed(); // 勝手にやってくれる様子
           if (!flg) {
             flg = true;
-            this.opts = [];
+            this.options = [];
           }
-          this.opts.push(radio);
+          this.options.push(radio);
         } else if (opt.nodeName == "INPUT") {
           //console.log(opt.nodeName, opt.getAttribute("type"));
           opt.name = this.name;
@@ -64,6 +73,8 @@ class InputRadio extends HTMLElement {
       }
     };
     rep(this);
+    this._checkRequired();
+    this.onchange = () => this._checkRequired();
 
     // Options for the observer (which mutations to observe)
     const config = { attributes: true, childList: true, subtree: true };
@@ -90,6 +101,11 @@ class InputRadio extends HTMLElement {
     // Start observing the target node for configured mutations
     observer.observe(this, config);
   }
+  _checkRequired() {
+    if (this.getAttribute("required") == "required") {
+      this.className = this.value ? "" : "required";
+    }
+  }
   /*
   changed() { // 勝手にやってくれたので不要
     if (this.onchange != null) {
@@ -104,7 +120,7 @@ class InputRadio extends HTMLElement {
   }
   */
   get value() {
-    const o = this.opts.find(o => o.checked);
+    const o = this.options.find(o => o.checked);
     if (!o) {
       return null;
     }
@@ -112,14 +128,17 @@ class InputRadio extends HTMLElement {
   }
   set value(v) {
     if (v == null) {
-      this.opts.forEach(o => o.checked = false);
+      this.options.forEach(o => o.checked = false);
+      this._checkRequired();
       return;
     }
-    const o = this.opts.find(o => o.value == v);
+    const o = this.options.find(o => o.value == v);
     if (!o) {
+      this._checkRequired();
       return;
     }
     o.checked = true;
+    this._checkRequired();
   }
   set data(json) {
     if (!Array.isArray(json)) {
@@ -127,27 +146,38 @@ class InputRadio extends HTMLElement {
     }
     if (json.length == 0) {
       this.innerHTML = "";
+      this._checkRequired();
       return;
     }
-    const ss = [];
-    ss.push("<option value='' disabled>");
     const d = json[0];
-    for (const n in d) {
-      ss.push("<span class=" + n + ">" + n + "</span>");
-    }
-    ss.push("</option>");
-    let idx = 0;
-    for (const d of json) {
-      ss.push("<option value=" + idx++ + ">");
+    if (typeof d == "object") {
+      const ss = [];
+      ss.push("<option value='' disabled>");
       for (const n in d) {
-        ss.push("<span class=" + n + ">" + d[n] + "</span>");
+        ss.push("<span class=" + n + ">" + n + "</span>");
       }
       ss.push("</option>");
+      let idx = 0;
+      for (const d of json) {
+        ss.push("<option value=" + idx++ + ">");
+        for (const n in d) {
+          ss.push("<span class=" + n + ">" + d[n] + "</span>");
+        }
+        ss.push("</option>");
+      }
+      this.innerHTML = ss.join("");
+    } else if (typeof d == "string") {
+      const ss = [];
+      for (const d of json) {
+        ss.push("<option value=" + d + ">");
+        ss.push("<span>" + d + "</span>");
+        ss.push("</option>");
+      }
+      this.innerHTML = ss.join("");
     }
-    this.innerHTML = ss.join("");
+    this._checkRequired();
   }
 }
-
 
 customElements.define("input-radio", InputRadio);
 

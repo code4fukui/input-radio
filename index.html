@@ -29,6 +29,34 @@ set.onclick = () => {
   
 <hr>
 
+<div id=c2></div>
+<div id=c2_res></div>
+
+<script type="module">
+import { InputRadio } from "./input-radio.js";
+
+const opts = {
+  data: ["A", "B"],
+  //data: [ { name: "A", value: 1 }, { name: "B", value: 2 }],
+  required: "required",
+  //value: "B",
+};
+const inp2 = new InputRadio(opts);
+c2.appendChild(inp2);
+inp2.onchange = () => {
+  c2_res.textContent = inp2.value;
+};
+
+</script>
+<style>
+.required {
+  background-color: #fcc;
+}
+</style>
+
+<hr>
+
+
 <input-radio id="inputradio2">
   <option>ABC</option><br>
   <option selected>DEF</option><br>
