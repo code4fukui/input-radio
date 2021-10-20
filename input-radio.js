@@ -54,8 +54,16 @@ class InputRadio extends HTMLElement {
           c.appendChild(radio);
           c.appendChild(label);
           opt.parentNode.replaceChild(c, opt);
-  
+          
           //radio.onchange = () => this.changed(); // 勝手にやってくれる様子
+          /*
+          radio.onchange = () => {
+            console.log("radio")
+            if (this.onchange) {
+              this.onchange();
+            }
+          };
+          */
           if (!flg) {
             flg = true;
             this.options = [];
@@ -74,7 +82,8 @@ class InputRadio extends HTMLElement {
     };
     rep(this);
     this._checkRequired();
-    this.onchange = () => this._checkRequired();
+    //this.onchange = () => this._checkRequired();
+    this.addEventListener("change", () => this._checkRequired());
 
     // Options for the observer (which mutations to observe)
     const config = { attributes: true, childList: true, subtree: true };
