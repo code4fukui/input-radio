@@ -131,7 +131,7 @@ class InputRadio extends HTMLElement {
   get value() {
     const o = this.options.find(o => o.checked);
     if (!o) {
-      return null;
+      return "";
     }
     return o.value;
   }
