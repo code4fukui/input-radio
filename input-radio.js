@@ -6,10 +6,10 @@ class InputRadio extends HTMLElement {
     setAttributes(this, opts);
     this.name = (Math.random() * 10000000) >> 0;
     this.options = [];
-    this._replace();
     if (opts?.data) {
       this.data = opts.data;
     }
+    this._replace();
     if (opts?.value) {
       this.value = opts.value;
     }
