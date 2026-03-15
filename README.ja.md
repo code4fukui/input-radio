@@ -1,17 +1,18 @@
 # input-radio
 
-A custom HTML element that provides a radio button interface.
+HTML要素の`<input-radio>`で、簡単にラジオボタンを表示できるカスタムエレメントです。
 
-## Demo
+## デモ
 https://code4fukui.github.io/input-radio/
 
-## Features
-- Supports basic radio button functionality
-- Allows for custom data sources and layouts
-- Automatically manages required field validation
+## 機能
+- ラジオボタンをHTML要素で簡単に表示できる
+- データをJSONで指定して、テーブル形式で表示できる
+- 必須項目の設定ができる
+- CSSでスタイリングが可能
 
-## Usage
-Include the `input-radio.js` script and use the `<input-radio>` element in your HTML:
+## 使い方
+HTMLで以下のように使用できます:
 
 ```html
 <script type="module" src="https://code4fukui.github.io/input-radio/input-radio.js"></script>
@@ -23,13 +24,13 @@ Include the `input-radio.js` script and use the `<input-radio>` element in your 
 </input-radio>
 ```
 
-You can also use a data-driven approach:
+データをJSONで指定して、テーブル形式で表示することもできます:
 
 ```html
 <script type="module" src="https://code4fukui.github.io/input-radio/input-radio.js"></script>
 <link rel="stylesheet" href="https://code4fukui.github.io/input-radio/input-radio.table.css">
 <style>
-#inputradio5 > span span { /* Expand width */
+#inputradio5 > span span { /* 幅を広げる */
   width: 10em;
 }
 </style>
@@ -49,5 +50,5 @@ inputradio5.onchange = () => {
 </script>
 ```
 
-## License
+## ライセンス
 MIT License
