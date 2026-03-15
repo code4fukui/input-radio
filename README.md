@@ -1,5 +1,7 @@
 # input-radio
 
+> 日本語のREADMEはこちらです: [README.ja.md](README.ja.md)
+
 A custom HTML element that provides a radio button interface.
 
 ## Demo
