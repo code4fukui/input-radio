@@ -1,6 +1,6 @@
 # input-radio
 
-HTML要素の`<input-radio>`で、簡単にラジオボタンを表示できるカスタムエレメントです。
+HTML要素の`<input-radio>`で簡単にカスタムのラジオボタンを表示できるコンポーネントです。
 
 ## デモ
 https://code4fukui.github.io/input-radio/

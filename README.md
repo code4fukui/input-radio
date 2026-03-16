@@ -52,4 +52,4 @@ inputradio5.onchange = () => {
 ```
 
 ## License
-MIT License
+MIT License — see [LICENSE](LICENSE).
